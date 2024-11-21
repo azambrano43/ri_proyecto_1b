@@ -1,1 +1,0 @@
-# Aquí irá la lógica para obtener todos los elementos del corpus.
