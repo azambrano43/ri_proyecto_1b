@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import spacy
 import re
+import time
 import numpy as np
 import gensim.downloader as api
 
@@ -16,7 +17,7 @@ cls = lambda: os.system("cls")
 
 def main():
 
-    print(directorio_base)
+    # Carga de corpus preprocesado
     df_corpus_procesado = pd.read_csv(f"{directorio_base}\data\corpus_procesado.csv")
 
     # Carga de stopwords y signos de puntuacion
@@ -24,43 +25,52 @@ def main():
     signos_puntuacion = obtener_signos_puntuacion()
 
     # Aplicar la vectorización a todo el corpus
-    print("Vectorizando corpus a BOW")
+    print("Vectorizando corpus con BOW...")
     X_bow, bow_vectorizer = vectorize_bow(df_corpus_procesado["contenido_preproc_str"])
-    print("Vectorizando con TF-IDF")
+
+    print("Vectorizando corpus con TF-IDF...")
     X_tfidf, tfidf_vectorizer = vectorize_tfidf(df_corpus_procesado["contenido_preproc_str"])
-    print("Vectorizando con Word2Vec")
-    X_word2vec, word2vec_vectorizer = vectorize_word2vec(df_corpus_procesado["contenido_preproc_str"])
+
+    print("Vectorizando corpus con Word2Vec...")
+    w2v_model = api.load("word2vec-google-news-300")
+    X_word2vec = vectorize_word2vec(df_corpus_procesado["contenido_preproc_str"], w2v_model)
+
+    cls()
 
 
     while(True):
-        cls()
-
-        print("BUSCADOR DE PRUEBA")
+        print("\n\n")
+        print("|============== BUSCADOR DE PRUEBA ==============| \n")
         print("tfidf -- Utilizar TF-IDF para búsqueda")
         print("bow -- Utilizar Bag Of Words para búsqueda")
-        print("tfidf -- Utilizar Word2Vec para búsqueda")
+        print("word2vec -- Utilizar Word2Vec para búsqueda")
+        print("")
         print("salir -- Salir del buscador")
         print("")
+
         metodo_selec = str(input("Escribe una de las opciones para comenzar:   "))
 
-        if metodo_selec == "salir":
-            return "Saliendo..."
-
-        print("")
-        consulta = str(input("A continuación, escriba su consulta:   "))
-
-        consulta_preproc = preprocesar_contenido(consulta, stopwords, signos_puntuacion)
+        cls()
 
         if metodo_selec.lower() == "tfidf":
             corpus_vectorizado, vectorizador = X_tfidf, tfidf_vectorizer
         elif metodo_selec.lower() == "bow":
             corpus_vectorizado, vectorizador = X_bow, bow_vectorizer
         elif metodo_selec.lower() == "word2vec":
-            corpus_vectorizado, vectorizador = X_word2vec, word2vec_vectorizer
+            corpus_vectorizado, vectorizador = X_word2vec, w2v_model
+        elif metodo_selec.lower() == "salir":
+            return "Saliendo..."
         else:
-            return "ERROR, METODO NO SOPORTADO"
+            print("Escoja un método válido")
+            break
+        
+        print("")
+        consulta = str(input("A continuación, escriba su consulta:   "))
 
+        # Preprocesar la consulta con las funciones de preprocessing_functions
+        consulta_preproc = preprocesar_contenido(consulta, stopwords, signos_puntuacion)
 
+        # Realizar la busqueda y obtener resultados relevantes con search_functions
         indices_ordenados, resultados = buscar_documentos(consulta_preproc, corpus_vectorizado, vectorizador, metodo=metodo_selec)
 
         # Preparar los resultados incluyendo índice, relevancia y texto
@@ -73,11 +83,16 @@ def main():
             for indice in indices_ordenados
         ]
 
+        
+        cls()
         print("")
-        print("MOSTRANDO RESULTADOS RELEVANTES")
+        print(f"Mostrando resultados relevantes para la búsqueda:   {consulta}")
+        print("")
         for resultado in resultados_detallados[:10]:
             print(f"Índice: {resultado['indice']}, Relevancia: {resultado['relevancia']:.2f}")
             print(f"Texto: {resultado['texto']}\n")
+
+        str(input("|============== Presione enter para continuar ==============|"))
 
 
 main()

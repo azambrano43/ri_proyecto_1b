@@ -21,7 +21,7 @@ def vectorize_tfidf(corpus):
     return X, vectorizer
 
 # ---- Word2Vec ----
-def vectorize_word2vec(corpus_tokens):
+def vectorize_word2vec(corpus_tokens, w2v_model):
     """
     Vectoriza un corpus utilizando Word2Vec preentrenado.
     Cada documento se convierte en un vector promedio.
@@ -32,9 +32,7 @@ def vectorize_word2vec(corpus_tokens):
             return sum(valid_vectors) / len(valid_vectors)
         else:
             return np.zeros(model.vector_size)
-        
-    word2vec_model = api.load("word2vec-google-news-300")
 
-    vectors = [get_avg_word2vec(tokens, word2vec_model) for tokens in corpus_tokens]
+    vectors = [get_avg_word2vec(tokens, w2v_model) for tokens in corpus_tokens]
     
-    return np.vstack(vectors), word2vec_model
+    return np.vstack(vectors)

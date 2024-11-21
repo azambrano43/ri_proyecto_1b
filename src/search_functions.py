@@ -1,4 +1,5 @@
 from sklearn.metrics.pairwise import cosine_similarity
+from vectorization_functions import vectorize_word2vec
 
 def buscar_documentos(consulta, corpus_vectorizado, vectorizador, metodo="tfidf"):
     """
@@ -10,7 +11,7 @@ def buscar_documentos(consulta, corpus_vectorizado, vectorizador, metodo="tfidf"
     elif metodo == "tfidf":
         consulta_vec = vectorizador.transform([consulta])
     elif metodo == "word2vec":
-        consulta_vec = vectorizador([consulta])[0].reshape(1, -1)
+        consulta_vec = vectorize_word2vec([consulta], vectorizador)[0].reshape(1, -1)
     else:
         raise ValueError("Método no soportado")
     
