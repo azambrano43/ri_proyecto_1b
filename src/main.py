@@ -6,6 +6,7 @@ import time
 import numpy as np
 import gensim.downloader as api
 
+from inverted_index import construir_indice_invertido, guardar_indice_invertido
 from preprocessing_functions import preprocesar_contenido, obtener_stopwords, obtener_signos_puntuacion
 from vectorization_functions import vectorize_bow, vectorize_tfidf, vectorize_word2vec
 from search_functions import buscar_documentos
@@ -34,6 +35,15 @@ def main():
     print("Vectorizando corpus con Word2Vec...")
     w2v_model = api.load("word2vec-google-news-300")
     X_word2vec = vectorize_word2vec(df_corpus_procesado["contenido_preproc_str"], w2v_model)
+
+    # Creación del índice invertido en /data/indice_invertido.txt
+    indice_invertido = construir_indice_invertido(df_corpus_procesado)
+
+    # Guardar el índice invertido en un archivo
+    path_indice_invertido = f"{directorio_base}\indice_invertido.txt"
+    guardar_indice_invertido(indice_invertido, path_indice_invertido)
+
+    print(f"Índice invertido creado y almacenado en indice_invertido.txt")
 
     cls()
 
@@ -89,7 +99,7 @@ def main():
         print(f"Mostrando resultados relevantes para la búsqueda:   {consulta}")
         print("")
         for resultado in resultados_detallados[:10]:
-            print(f"Índice: {resultado['indice']}, Relevancia: {resultado['relevancia']:.2f}")
+            print(f"Índice: {resultado['indice']}, Relevancia: {resultado['relevancia']:.3f}")
             print(f"Texto: {resultado['texto']}\n")
 
         str(input("|============== Presione enter para continuar ==============|"))
