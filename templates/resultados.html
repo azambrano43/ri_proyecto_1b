@@ -15,20 +15,21 @@
 
     <div class="result-container">
         <!-- Caja de búsqueda -->
-        <div class="search-box">
-            <form action="/buscar" method="GET">
-                <input type="text" name="consulta" class="search-input" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
-                <button type="submit" class="search-button">Buscar</button>
-                <div class="method-selection">
-                    <select name="metodo" class="method-dropdown">
-                        <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
-                        <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
-                        <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
-                        <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
-                    </select>
-                </div>
-            </form>
-        </div>
+        <!-- Caja de búsqueda -->
+    <div class="search-box">
+        <form action="/buscar" method="GET" style="display: flex; align-items: center; gap: 10px;">
+            <input type="text" name="consulta" class="search-input" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
+            <div class="method-selection">
+                <select name="metodo" class="method-dropdown">
+                    <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
+                    <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
+                    <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
+                    <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
+                </select>
+            </div>
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
+    </div>
 
         <!-- Resultados -->
         {% if resultados %}
