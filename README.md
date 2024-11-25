@@ -15,6 +15,7 @@ RI_PROYECTO_1B/
 │   ├── cats.txt               # Categorías del corpus
 │   ├── corpus_procesado.csv   # Corpus ya procesado
 │   ├── corpus_sin_procesar.csv # Corpus original sin procesar
+│   ├── stopwords/              # Lista de palabras vacías para preprocesamiento
 │   └── indice_invertido.txt   # Índice invertido generado
 │
 ├── notebooks/                 # Notebooks de Jupyter para pruebas y análisis
@@ -28,7 +29,11 @@ RI_PROYECTO_1B/
 │   ├── search_functions.py    # Funciones relacionadas con la búsqueda en el índice
 │   └── vectorization_functions.py # Funciones para la vectorización de texto
 │
-├── stopwords/                 # Lista de palabras vacías para preprocesamiento
+├── templates/                 # Templates para la pagina web
+│   └── index.html              # template de ruta raiz
+│
+│
+├── index.py                  # Archivo .py encargado del manejo de la logica web
 ├── README.md                  # Descripción general del proyecto
 ├── .gitignore                 # Archivos y carpetas ignorados por Git
 ```
@@ -80,7 +85,7 @@ En próximas etapas se integrará una interfaz web con **Flask** para proporcion
 Instalar las siguientes dependencias antes de ejecutar el proyecto:
 
 ```bash
-pip install scikit-learn gensim pandas numpy flask
+pip install scikit-learn gensim pandas numpy flask nltk
 ```
 
 ### Descarga de recursos de NLTK

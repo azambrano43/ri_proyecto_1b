@@ -67,13 +67,13 @@ def main():
 
         cls()
 
-        if metodo_selec == "1":
+        if metodo_selec == "tfidf":
             corpus_vectorizado, vectorizador = X_tfidf, tfidf_vectorizer
-        elif metodo_selec == "2":
+        elif metodo_selec == "bow":
             corpus_vectorizado, vectorizador = X_bow, bow_vectorizer
-        elif metodo_selec == "3":
+        elif metodo_selec == "word2vec":
             corpus_vectorizado, vectorizador = X_word2vec, w2v_model
-        elif metodo_selec == "4":
+        elif metodo_selec == "indice_invertido":
             pass
         elif metodo_selec == "0":
             return "Saliendo..."
@@ -87,7 +87,7 @@ def main():
         # Preprocesar la consulta con las funciones de preprocessing_functions
         consulta_preproc = preprocesar_contenido(consulta, stopwords, signos_puntuacion)
 
-        if metodo_selec == "1" or metodo_selec == "2" or metodo_selec == "3":
+        if metodo_selec == "tfidf" or metodo_selec == "bow" or metodo_selec == "word2vec":
             # Realizar la busqueda y obtener resultados relevantes con search_functions
             indices_ordenados, resultados = buscar_documentos(consulta_preproc, corpus_vectorizado, vectorizador, metodo=metodo_selec)
 
@@ -107,7 +107,7 @@ def main():
                 print(f"Índice: {resultado['indice']}, Relevancia: {resultado['relevancia']:.3f}")
                 print(f"Texto: {resultado['texto']}\n")
 
-        elif metodo_selec == "4":
+        elif metodo_selec == "indice_invertido":
             if len(consulta_preproc.split()) == 1:
                 resultados = buscar_palabra_indice_invertido(indice_invertido, df_corpus_procesado, consulta_preproc, top_n=max_resultados)
             elif len(consulta_preproc.split()) > 1:
