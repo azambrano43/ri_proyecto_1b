@@ -4,70 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Información</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 5%;
-            background-color: #f2f2f2;
-        }
-        .search-box {
-            width: 50%;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .search-input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .search-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4285F4;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
-        .search-button:hover {
-            background-color: #357ae8;
-        }
-        .method-selection {
-            margin: 20px 0;
-            text-align: left;
-        }
-        .method-selection label {
-            margin-right: 15px;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <h1>Buscador de Información</h1>
     <div class="search-box">
         <form action="/buscar" method="POST">
-            <input type="text" name="consulta" class="search-input" placeholder="Escribe tu consulta aquí..." required>
-            <button type="submit" class="search-button">Buscar</button>
-            <div class="method-selection">
-                <label><input type="radio" name="metodo" value="tfidf" required> TF-IDF</label>
-                <label><input type="radio" name="metodo" value="bow"> Bag of Words</label>
-                <label><input type="radio" name="metodo" value="word2vec"> Word2Vec</label>
-                <label><input type="radio" name="metodo" value="indice_invertido"> Índice Invertido</label>
-            </div>
+            <div class="search-bar">
+                <input type="text" name="consulta" placeholder="Escribe tu consulta aquí...">
+                <div class="divider"></div> <!-- Línea divisoria -->
+                <select name="metodo">
+                  <option value="tfidf">TF-IDF</option>
+                  <option value="bow">Bag of Words</option>
+                  <option value="word2vec">Word2Vec</option>
+                  <option value="indice_invertido">Indice-invertido</option>
+                </select>
+                <button type="submit">BUSCAR</button>
+              </div>
         </form>
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
     </div>
 </body>
 </html>
