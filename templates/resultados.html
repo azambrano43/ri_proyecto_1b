@@ -14,23 +14,51 @@
     </div>
 
     <div class="result-container">
-        <!-- Caja de búsqueda -->
-        <!-- Caja de búsqueda -->
-    <div class="search-box">
-        <form action="/buscar" method="GET" style="display: flex; align-items: center; gap: 10px;">
-            <input type="text" name="consulta" class="search-input" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
-            <div class="method-selection">
-                <select name="metodo" class="method-dropdown">
-                    <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
-                    <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
-                    <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
-                    <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
-                </select>
+        <!-- Barra de búsqueda -->
+        <div class="search-box">
+            <form action="/buscar" method="GET" style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" name="consulta" class="search-input" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
+                <div class="method-selection">
+                    <select name="metodo" class="method-dropdown">
+                        <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
+                        <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
+                        <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
+                        <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
+                    </select>
+                </div>
+                <button type="submit" class="search-button">Buscar</button>
+            </form>
+        </div>
+        {% if mensaje %}
+        <div class="alerta-mensaje" style="margin: 10px 0; padding: 10px; background-color: #ffefc1; border: 1px solid #ffcc00; color: #8a6d3b;">
+            <p>{{ mensaje }}</p>
+        </div>
+        {% endif %}
+            <!-- Mostrar las métricas de evaluación si están disponibles -->
+        {% if precision is not none %}
+        <div class="metrics" style="margin: 10px 0; padding: 10px; background-color: #ffefc1; border: 1px solid #ffcc00; color: #8a6d3b;">
+            <h3>Resultados de Evaluación</h3>
+            <p><strong>Precisión:</strong> {{ precision }}%</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar precision-bar" style="width: {{ precision }}%;"></div>
             </div>
-            <button type="submit" class="search-button">Buscar</button>
-        </form>
-    </div>
-
+          
+            <p><strong>Recall:</strong> {{ recall }}%</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar recall-bar" style="width: {{ recall }}%;"></div>
+            </div>
+          
+            <p><strong>F1-Score:</strong> {{ f1_score }}%</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar f1-score-bar" style="width: {{ f1_score }}%;"></div>
+            </div>
+          </div>
+        {% else %}
+            <div class="no-result" style="margin: 10px 0; padding: 10px; background-color: #ffefc1; border: 1px solid #ffcc00; color: #8a6d3b;">
+            <p><strong>Indice invertido - Sin métricas disponibles.</strong></p>
+          </div>
+        {% endif %}
+        
         <!-- Resultados -->
         {% if resultados %}
             {% for resultado in resultados %}
@@ -39,7 +67,11 @@
                     {% if resultado.relevancia %}
                         <p class="relevancia"><strong>Relevancia:</strong> {{ resultado.relevancia }}</p>
                     {% endif %}
-                    <p>{{ resultado.contenido }}</p>
+                    <div class="content">
+                        <p class="content-preview">{{ resultado.contenido[:200] }}...</p>
+                        <p class="content-full" style="display: none;">{{ resultado.contenido }}</p>
+                        <button class="toggle-content">Ver más</button>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
@@ -50,14 +82,9 @@
 
         <!-- Paginación -->
         <div class="pagination">
-            <!-- Botones de inicio y anterior -->
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=1) }}" class="{% if pagina == 1 %}disabled{% endif %}">&laquo;</a>
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=pagina-1) }}" class="{% if pagina == 1 %}disabled{% endif %}">&lsaquo;</a>
-            
-            <!-- Número de páginas -->
             <span class="page-info">Página {{ pagina }} de {{ total_paginas }}</span>
-            
-            <!-- Botones de siguiente y final -->
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=pagina+1) }}" class="{% if pagina == total_paginas %}disabled{% endif %}">&rsaquo;</a>
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=total_paginas) }}" class="{% if pagina == total_paginas %}disabled{% endif %}">&raquo;</a>
 
@@ -70,5 +97,27 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleButtons = document.querySelectorAll(".toggle-content");
+            toggleButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    const contentPreview = button.previousElementSibling.previousElementSibling;
+                    const contentFull = button.previousElementSibling;
+
+                    if (contentFull.style.display === "none") {
+                        contentFull.style.display = "block";
+                        contentPreview.style.display = "none";
+                        button.textContent = "Ver menos";
+                    } else {
+                        contentFull.style.display = "none";
+                        contentPreview.style.display = "block";
+                        button.textContent = "Ver más";
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
