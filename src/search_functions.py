@@ -7,11 +7,11 @@ def buscar_documentos(consulta, corpus_vectorizado, vectorizador, metodo="tfidf"
     Busca documentos en el corpus y devuelve los más relevantes según el método elegido (BoW, TF-IDF, Word2Vec).
     """
     # Vectorizar la consulta
-    if metodo == "1":
+    if metodo == "tfidf":
         consulta_vec = vectorizador.transform([consulta])
-    elif metodo == "2":
+    elif metodo == "bow":
         consulta_vec = vectorizador.transform([consulta])
-    elif metodo == "3":
+    elif metodo == "word2vec":
         consulta_vec = vectorize_word2vec([consulta], vectorizador)[0].reshape(1, -1)
     else:
         raise ValueError("Método no soportado")
@@ -27,7 +27,7 @@ def buscar_documentos(consulta, corpus_vectorizado, vectorizador, metodo="tfidf"
     
     return indices_ordenados, resultados
 
-def buscar_palabra_indice_invertido(indice_invertido, df, termino, top_n=10, texto_column='contenido'):
+def buscar_palabra_indice_invertido(indice_invertido, df, termino, top_n=None, texto_column='contenido'):
     """
     Busca un término en el índice invertido y devuelve los 'top_n' documentos más relevantes.
     Solo muestra el contenido del documento.
@@ -48,8 +48,11 @@ def buscar_palabra_indice_invertido(indice_invertido, df, termino, top_n=10, tex
         documentos = indice_invertido[termino]
         
         # Ordenar los documentos por frecuencia y tomar los 'top_n' más relevantes
-        documentos_relevantes = sorted(documentos.items(), key=lambda item: item[1], reverse=True)[:top_n]
+        documentos_relevantes = sorted(documentos.items(), key=lambda item: item[1], reverse=True)
         #print(documentos_relevantes)
+
+        if top_n is not None:
+            documentos_relevantes = documentos_relevantes[:top_n]        
         
         # Extraer el contenido de los documentos relevantes
         lista_resultados = []

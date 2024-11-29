@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de Información</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script>
+        function validarFormulario(event) {
+            const consulta = document.querySelector('input[name="consulta"]').value.trim();
+            if (!consulta) {
+                alert("Por favor, escribe una consulta antes de buscar.");
+                event.preventDefault(); // Evita que el formulario se envíe
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="search-box">
+        <form action="/buscar" method="POST" onsubmit="validarFormulario(event)">
+            <div class="search-bar">
+                <input type="text" name="consulta" placeholder="Escribe tu consulta aquí...">
+                <div class="divider"></div> <!-- Línea divisoria -->
+                <select name="metodo">
+                  <option value="tfidf">TF-IDF</option>
+                  <option value="bow">Bag of Words</option>
+                  <option value="word2vec">Word2Vec</option>
+                  <option value="indice_invertido">Indice-invertido</option>
+                </select>
+                <button type="submit">BUSCAR</button>
+              </div>
+        </form>
+    </div>
+</body>
+</html>
