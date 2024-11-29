@@ -93,7 +93,7 @@ El proyecto utiliza recursos de NLTK para el preprocesamiento del texto. Ejecute
 ```python
 import nltk
 nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
+nltk.download('averaged_perceptron_tagger_en')
 nltk.download('wordnet')
 ```
 
