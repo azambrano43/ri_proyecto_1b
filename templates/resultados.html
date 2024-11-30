@@ -42,9 +42,18 @@
         {% if precision is not none %}
         <div class="metrics">
             <h3>Resultados de Evaluación</h3>
-            <p><strong>Precisión:</strong> {{ precision }}%</p>
-            <p><strong>Recall:</strong> {{ recall }}%</p>
-            <p><strong>F1-Score:</strong> {{ f1_score }}%</p>
+            <div class="metric-card">
+                <h4 class="metric-title">Precisión</h4>
+                <p class="metric-value">{{ precision | round(4) }}%</p>
+            </div>
+            <div class="metric-card">
+                <h4 class="metric-title">Recall</h4>
+                <p class="metric-value">{{ recall | round(4) }}%</p>
+            </div>
+            <div class="metric-card">
+                <h4 class="metric-title">F1-Score</h4>
+                <p class="metric-value">{{ f1_score | round(4) }}%</p>
+            </div>
         </div>
         {% else %}
         <div class="no-result">

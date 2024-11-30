@@ -24,6 +24,25 @@ body::before {
     z-index: -1;
 }
 
+/* Contenedor principal */
+.result-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+    padding: 30px; /* Incrementa el padding para más espacio */
+    border-radius: 10px;
+    max-width: 900px;
+    margin: 40px auto; /* Espaciado hacia abajo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la sección */
+.result-container h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #202124;
+}
+
 /* Ícono de volver */
 .volver-icono {
     position: absolute;
@@ -65,24 +84,62 @@ body::before {
     color: #357ae8;
 }
 
-/* Contenedor principal */
-.result-container {
+/* Contenedor de métricas */
+.metrics {
+    display: flex;
+    flex-direction: row; /* Cambia a diseño horizontal */
+    align-items: center; /* Alineación central */
+    justify-content: center; /* Centra horizontalmente */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    margin: 20px auto; /* Centra el contenedor en la página */
+    padding: 20px; /* Espaciado interno */
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-    padding: 15px;
-    border-radius: 8px;
-    max-width: 900px;
-    margin: 20px auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 800px; /* Limita el ancho del contenedor */
 }
 
-/* Contenedor de resultados en dos columnas */
+/* Tarjetas individuales */
+.metric-card {
+    background-color: #f1f8ff; /* Azul claro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    text-align: center;
+    flex: 1; /* Permite que las tarjetas tengan el mismo tamaño */
+    max-width: 250px; /* Tamaño máximo de cada tarjeta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px); /* Efecto hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Título de cada métrica */
+.metric-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a73e8; /* Azul Google */
+    margin-bottom: 8px; /* Espaciado entre el título y el valor */
+}
+
+/* Valor de cada métrica */
+.metric-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #202124;
+    margin: 0;
+}
+
+/* Contenedor de resultados adicionales (opcional) */
 .result-columns {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
     gap: 15px; /* Espaciado entre columnas */
+    margin-top: 30px;
 }
 
-/* Estilo de cada resultado */
 .result {
     background-color: rgba(255, 255, 255, 0.95);
     border-radius: 6px;
@@ -141,7 +198,7 @@ body::before {
     width: 100%;
     max-width: 800px;
     padding: 8px;
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 .search-box input[type="text"] {
@@ -181,7 +238,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 20px;
     gap: 8px;
     font-size: 14px;
 }
