@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/Simple_Minimalist_Background_magic.png') no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/Simple_Minimalist_Background.png') no-repeat center center fixed;
   background-size: cover;
   display: flex;
   justify-content: center;
