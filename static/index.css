@@ -2,7 +2,8 @@
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: #f0f2f5;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/Preprocessing_Background_Laptop.png') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,17 +14,18 @@ body {
 .search-bar {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
-  border-radius: 35px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border-radius: 50px; /* Bordes más redondeados */
   overflow: hidden;
   width: 850px;
   height: 70px;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 .search-bar:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .search-bar input[type="text"] {
@@ -35,40 +37,87 @@ body {
   color: #333;
   background-color: #f8f9fc;
   border-right: 1px solid #e0e0e0;
-  border-radius: 35px 0 0 35px;
-  transition: background-color 0.3s ease;
+  border-radius: 50px 0 0 50px;
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease, border 0.3s ease;
 }
 
 .search-bar input[type="text"]:focus {
   background-color: #ffffff;
+  border: 1px solid #0056b3;
+  box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
 }
 
 .search-bar select {
   border: none;
   outline: none;
-  padding: 15px;
-  font-size: 18px;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
   color: #333;
   background-color: transparent;
   cursor: pointer;
   text-align: center;
-  font-weight: 500;
+  border-right: 1px solid #e0e0e0;
+  background-image: url('img/arrow-icon.svg'); /* Icono de flecha */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.search-bar select:hover {
+  background-color: #f0f2f5;
+  color: #0056b3;
+}
+
+.search-bar select option {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #ffffff;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.search-bar select option:checked {
+  background-color: #0056b3;
+  color: #ffffff;
+}
+
+.search-bar select option:hover {
+  background-color: #f0f2f5;
+  color: #0056b3;
 }
 
 .search-bar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   outline: none;
   padding: 24px 30px;
-  background-color: #0056b3;
+  background: linear-gradient(90deg, #0056b3, #0078d4); /* Gradiente para más estilo */
   color: #ffffff;
   font-weight: 500;
   font-size: 18px;
   cursor: pointer;
-  border-radius: 0 35px 35px 0;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 0 50px 50px 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .search-bar button:hover {
   background-color: #004494;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 86, 179, 0.5);
+}
+
+.search-bar button:active {
+  transform: scale(0.95);
+}
+
+/* Transiciones generales */
+.search-bar * {
+  transition: all 0.3s ease-in-out;
 }
