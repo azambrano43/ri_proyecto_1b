@@ -17,17 +17,20 @@
     <div class="result-container">
         <!-- Barra de búsqueda -->
         <div class="search-box">
-            <form action="/buscar" method="GET" style="display: flex; align-items: center; gap: 10px;">
-                <input type="text" name="consulta" class="search-input" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
-                <div class="method-selection">
-                    <select name="metodo" class="method-dropdown">
-                        <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
-                        <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
-                        <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
-                        <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
-                    </select>
-                </div>
-                <button type="submit" class="search-button">Buscar</button>
+            <form action="/buscar" method="GET" style="display: flex; align-items: center; width: 100%;">
+                <!-- Campo de entrada -->
+                <input type="text" name="consulta" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
+                
+                <!-- Selector de método -->
+                <select name="metodo">
+                    <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
+                    <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
+                    <option value="bow" {% if metodo == "bow" %}selected{% endif %}>Bag of Words</option>
+                    <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
+                </select>
+                
+                <!-- Botón de búsqueda -->
+                <button type="submit">Buscar</button>
             </form>
         </div>
 
@@ -44,15 +47,15 @@
             <h3>Resultados de Evaluación</h3>
             <div class="metric-card">
                 <h4 class="metric-title">Precisión</h4>
-                <p class="metric-value">{{ precision | round(4) }}%</p>
+                <p class="metric-value">{{ precision | round(4) }}</p>
             </div>
             <div class="metric-card">
                 <h4 class="metric-title">Recall</h4>
-                <p class="metric-value">{{ recall | round(4) }}%</p>
+                <p class="metric-value">{{ recall | round(4) }}</p>
             </div>
             <div class="metric-card">
                 <h4 class="metric-title">F1-Score</h4>
-                <p class="metric-value">{{ f1_score | round(4) }}%</p>
+                <p class="metric-value">{{ f1_score | round(4) }}</p>
             </div>
         </div>
         {% else %}
