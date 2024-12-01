@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de Búsqueda</title>
+    <!-- Declaración del tipo de documento HTML y configuración del idioma -->
+    <meta charset="UTF-8"> <!-- Codificación UTF-8 para caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptabilidad a dispositivos móviles -->
+    <title>Resultados de Búsqueda</title> <!-- Título de la página -->
+    
+    <!-- Enlace al archivo de estilos CSS para los resultados -->
     <link rel="stylesheet" href="{{ url_for('static', filename='resultados.css') }}">
 </head>
 <body>
-    <!-- Botón de volver -->
+    <!-- ---------- Botón de Volver ---------- -->
     <div class="volver-icono">
-        <a href="/">&#x2190;</a>
-        <span>Inicio</span>
+        <a href="/">&#x2190;</a> <!-- Flecha para volver a la página de inicio -->
+        <span>Inicio</span> <!-- Texto que acompaña al botón -->
     </div>
 
-    <!-- Contenedor principal -->
+    <!-- ---------- Contenedor Principal ---------- -->
     <div class="result-container">
-        <!-- Barra de búsqueda -->
+        <!-- ---------- Barra de Búsqueda ---------- -->
         <div class="search-box">
             <form action="/buscar" method="GET" style="display: flex; align-items: center; width: 100%;">
-                <!-- Campo de entrada -->
+                <!-- Campo de entrada para la consulta -->
                 <input type="text" name="consulta" value="{{ raw_consulta }}" placeholder="Escribe tu consulta aquí..." required>
                 
-                <!-- Selector de método -->
+                <!-- Selector para elegir el método de búsqueda -->
                 <select name="metodo">
                     <option value="indice_invertido" {% if metodo == "indice_invertido" %}selected{% endif %}>Índice Invertido</option>
                     <option value="tfidf" {% if metodo == "tfidf" %}selected{% endif %}>TF-IDF</option>
@@ -29,30 +32,33 @@
                     <option value="word2vec" {% if metodo == "word2vec" %}selected{% endif %}>Word2Vec</option>
                 </select>
                 
-                <!-- Botón de búsqueda -->
+                <!-- Botón para iniciar la búsqueda -->
                 <button type="submit">Buscar</button>
             </form>
         </div>
 
-        <!-- Mensajes de alerta -->
+        <!-- ---------- Mensajes de Alerta ---------- -->
         {% if mensaje %}
         <div class="alerta-mensaje">
-            <p>{{ mensaje }}</p>
+            <p>{{ mensaje }}</p> <!-- Mensaje dinámico generado por el servidor -->
         </div>
         {% endif %}
 
-        <!-- Métricas de evaluación -->
+        <!-- ---------- Métricas de Evaluación ---------- -->
         {% if precision is not none %}
         <div class="metrics">
             <h3>Resultados de Evaluación</h3>
+            <!-- Métrica de Precisión -->
             <div class="metric-card">
                 <h4 class="metric-title">Precisión</h4>
                 <p class="metric-value">{{ precision | round(4) }}</p>
             </div>
+            <!-- Métrica de Recall -->
             <div class="metric-card">
                 <h4 class="metric-title">Recall</h4>
                 <p class="metric-value">{{ recall | round(4) }}</p>
             </div>
+            <!-- Métrica de F1-Score -->
             <div class="metric-card">
                 <h4 class="metric-title">F1-Score</h4>
                 <p class="metric-value">{{ f1_score | round(4) }}</p>
@@ -64,19 +70,22 @@
         </div>
         {% endif %}
 
-        <!-- Resultados en dos columnas -->
+        <!-- ---------- Resultados en dos columnas ---------- -->
         <div class="result-columns">
             {% if resultados %}
                 {% for resultado in resultados %}
                 <div class="result">
+                    <!-- Título del resultado -->
                     <h3>Documento ID: {{ resultado.id }}</h3>
+                    <!-- Relevancia del resultado, si existe -->
                     {% if resultado.relevancia %}
                     <p class="relevancia"><strong>Relevancia:</strong> {{ resultado.relevancia }}</p>
                     {% endif %}
+                    <!-- Contenido del resultado -->
                     <div class="content">
-                        <p class="content-preview">{{ resultado.contenido[:200] }}...</p>
-                        <p class="content-full" style="display: none;">{{ resultado.contenido }}</p>
-                        <button class="toggle-content">Ver más</button>
+                        <p class="content-preview">{{ resultado.contenido[:200] }}...</p> <!-- Vista previa -->
+                        <p class="content-full" style="display: none;">{{ resultado.contenido }}</p> <!-- Contenido completo -->
+                        <button class="toggle-content">Ver más</button> <!-- Botón para alternar contenido -->
                     </div>
                 </div>
                 {% endfor %}
@@ -87,15 +96,16 @@
             {% endif %}
         </div>
 
-        <!-- Paginación -->
+        <!-- ---------- Paginación ---------- -->
         <div class="pagination">
+            <!-- Botones de navegación entre páginas -->
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=1) }}" class="{% if pagina == 1 %}disabled{% endif %}">&laquo;</a>
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=pagina-1) }}" class="{% if pagina == 1 %}disabled{% endif %}">&lsaquo;</a>
             <span class="page-info">Página {{ pagina }} de {{ total_paginas }}</span>
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=pagina+1) }}" class="{% if pagina == total_paginas %}disabled{% endif %}">&rsaquo;</a>
             <a href="{{ url_for('buscar', consulta=raw_consulta, metodo=metodo, pagina=total_paginas) }}" class="{% if pagina == total_paginas %}disabled{% endif %}">&raquo;</a>
 
-            <!-- Campo para ir a una página específica -->
+            <!-- Formulario para ir a una página específica -->
             <form action="/buscar" method="GET" style="display: flex; align-items: center; gap: 5px;">
                 <input type="hidden" name="consulta" value="{{ raw_consulta }}">
                 <input type="hidden" name="metodo" value="{{ metodo }}">
@@ -105,23 +115,26 @@
         </div>
     </div>
 
-    <!-- Script para mostrar más/menos contenido -->
+    <!-- ---------- Script para Alternar Contenido ---------- -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Obtiene todos los botones para alternar contenido
             const toggleButtons = document.querySelectorAll(".toggle-content");
             toggleButtons.forEach((button) => {
+                // Añade un evento de clic a cada botón
                 button.addEventListener("click", () => {
-                    const contentPreview = button.previousElementSibling.previousElementSibling;
-                    const contentFull = button.previousElementSibling;
+                    const contentPreview = button.previousElementSibling.previousElementSibling; // Vista previa
+                    const contentFull = button.previousElementSibling; // Contenido completo
 
+                    // Alterna entre mostrar y ocultar contenido
                     if (contentFull.style.display === "none") {
                         contentFull.style.display = "block";
                         contentPreview.style.display = "none";
-                        button.textContent = "Ver menos";
+                        button.textContent = "Ver menos"; // Cambia el texto del botón
                     } else {
                         contentFull.style.display = "none";
                         contentPreview.style.display = "block";
-                        button.textContent = "Ver más";
+                        button.textContent = "Ver más"; // Cambia el texto del botón
                     }
                 });
             });

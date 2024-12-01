@@ -1,325 +1,357 @@
+/* Importación de la fuente Roboto desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* Estilo general del cuerpo */
+/* ---------- Estilos Generales ---------- */
+/* Configuración general del cuerpo de la página */
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: #202124;
-    background-image: url('img/907edbcd-525c-4364-9b24-87133dc42f3b.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    position: relative;
+    margin: 0; /* Elimina el margen predeterminado del navegador */
+    font-family: 'Roboto', sans-serif; /* Fuente principal para el texto */
+    color: #202124; /* Color de texto predeterminado */
+    background-image: url('img/907edbcd-525c-4364-9b24-87133dc42f3b.webp'); /* Imagen de fondo */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Fija el fondo mientras se desplaza */
+    background-position: center; /* Centra la imagen de fondo */
+    position: relative; /* Posiciona el cuerpo relativo para superposiciones */
 }
 
+/* Capa superpuesta para oscurecer el fondo */
 body::before {
-    content: '';
-    position: fixed;
+    content: ''; /* Elemento vacío para crear una capa */
+    position: fixed; /* Fija la capa al fondo */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Oscurece el fondo */
-    z-index: -1;
+    background: rgba(0, 0, 0, 0.3); /* Color negro semitransparente */
+    z-index: -1; /* Coloca la capa detrás del contenido */
 }
 
-/* Contenedor principal */
+/* ---------- Contenedor Principal ---------- */
+/* Estilo del contenedor principal de resultados */
 .result-container {
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-    padding: 30px; /* Incrementa el padding para más espacio */
-    border-radius: 10px;
-    max-width: 900px;
-    margin: 40px auto; /* Espaciado hacia abajo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 900px; /* Ancho máximo del contenedor */
+    margin: 40px auto; /* Centra el contenedor vertical y horizontalmente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para profundidad */
 }
 
-/* Título de la sección */
+/* Estilo del título dentro del contenedor */
 .result-container h3 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #202124;
+    font-size: 24px; /* Tamaño de fuente del título */
+    font-weight: bold; /* Peso de fuente para destacar */
+    margin-bottom: 20px; /* Espaciado inferior */
+    text-align: center; /* Centra el texto */
+    color: #202124; /* Color del texto */
 }
 
-/* Ícono de volver */
+/* ---------- Botón de Volver ---------- */
+/* Estilo del ícono para regresar */
 .volver-icono {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    position: absolute; /* Posición absoluta respecto al cuerpo */
+    top: 20px; /* Margen superior */
+    left: 20px; /* Margen izquierdo */
+    display: flex; /* Crea un diseño flexible */
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 10px; /* Espaciado entre el ícono y el texto */
 }
 
+/* Estilo del enlace del botón */
 .volver-icono a {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #4285F4;
-    padding: 12px 15px;
-    border-radius: 50%;
-    font-size: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    display: flex;
+    text-decoration: none; /* Elimina subrayado del texto */
+    color: #ffffff; /* Color del texto */
+    background-color: #4285F4; /* Color de fondo azul */
+    padding: 12px 15px; /* Espaciado interno del botón */
+    border-radius: 50%; /* Botón circular */
+    font-size: 20px; /* Tamaño de la fuente */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transition: all 0.3s ease; /* Animación suave al interactuar */
+    display: flex; /* Flexbox para centrar el ícono */
     justify-content: center;
     align-items: center;
 }
 
+/* Estilo hover para el enlace del botón */
 .volver-icono a:hover {
-    background-color: #357ae8;
-    transform: scale(1.1);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    background-color: #357ae8; /* Color de fondo más oscuro */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Aumenta la sombra */
 }
 
+/* Estilo del texto del botón de volver */
 .volver-icono span {
-    font-size: 18px;
-    color: #202124;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-size: 18px; /* Tamaño de la fuente */
+    color: #202124; /* Color del texto */
+    font-weight: 500; /* Peso moderado del texto */
+    transition: color 0.3s ease; /* Transición suave del color */
 }
 
+/* Estilo hover para el texto */
 .volver-icono:hover span {
-    color: #357ae8;
+    color: #357ae8; /* Cambia a un azul más oscuro */
 }
 
-/* Contenedor de métricas */
+/* ---------- Contenedor de Métricas ---------- */
+/* Estilo del contenedor que agrupa las métricas */
 .metrics {
-    display: flex;
-    flex-direction: row; /* Cambia a diseño horizontal */
-    align-items: center; /* Alineación central */
-    justify-content: center; /* Centra horizontalmente */
+    display: flex; /* Diseño flexible para organizar tarjetas */
+    flex-direction: row; /* Organización horizontal */
+    align-items: center; /* Centra verticalmente las tarjetas */
+    justify-content: center; /* Centra horizontalmente las tarjetas */
     gap: 20px; /* Espaciado entre las tarjetas */
-    margin: 20px auto; /* Centra el contenedor en la página */
+    margin: 20px auto; /* Centra el contenedor con espaciado */
     padding: 20px; /* Espaciado interno */
     background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
     border-radius: 12px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    max-width: 800px; /* Limita el ancho del contenedor */
+    max-width: 800px; /* Ancho máximo del contenedor */
 }
 
-/* Tarjetas individuales */
+/* ---------- Tarjetas de Métricas ---------- */
+/* Estilo individual para cada tarjeta */
 .metric-card {
-    background-color: #f1f8ff; /* Azul claro */
-    padding: 20px;
-    border-radius: 10px;
+    background-color: #f1f8ff; /* Fondo azul claro */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    text-align: center;
-    flex: 1; /* Permite que las tarjetas tengan el mismo tamaño */
-    max-width: 250px; /* Tamaño máximo de cada tarjeta */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Centra el contenido */
+    flex: 1; /* Todas las tarjetas tienen el mismo tamaño */
+    max-width: 250px; /* Ancho máximo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación suave */
 }
 
+/* Efecto hover en las tarjetas */
 .metric-card:hover {
-    transform: translateY(-5px); /* Efecto hover */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Eleva ligeramente la tarjeta */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
 }
 
-/* Título de cada métrica */
+/* Estilo del título de la métrica */
 .metric-title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 18px; /* Tamaño del texto */
+    font-weight: bold; /* Fuente destacada */
     color: #1a73e8; /* Azul Google */
-    margin-bottom: 8px; /* Espaciado entre el título y el valor */
+    margin-bottom: 8px; /* Espaciado inferior */
 }
 
-/* Valor de cada métrica */
+/* Estilo del valor de la métrica */
 .metric-value {
-    font-size: 22px;
-    font-weight: 700;
-    color: #202124;
-    margin: 0;
+    font-size: 22px; /* Tamaño del texto */
+    font-weight: 700; /* Fuente destacada */
+    color: #202124; /* Color del texto */
+    margin: 0; /* Sin márgenes adicionales */
 }
 
-/* Contenedor de resultados adicionales (opcional) */
+/* ---------- Contenedor de Resultados Adicionales ---------- */
+/* Contenedor para agrupar resultados adicionales en un diseño de cuadrícula */
 .result-columns {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
-    gap: 15px; /* Espaciado entre columnas */
-    margin-top: 30px;
+    display: grid; /* Utiliza el modelo de cuadrícula */
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+    gap: 15px; /* Espaciado entre las columnas */
+    margin-top: 30px; /* Margen superior para separar del contenido anterior */
 }
 
+/* Estilo individual de cada resultado dentro del contenedor */
 .result {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+    border-radius: 6px; /* Bordes redondeados */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    padding: 15px; /* Espaciado interno */
+    transition: transform 0.2s ease, box-shadow 0.3s ease; /* Animaciones suaves */
 }
 
+/* Efecto hover para los resultados */
 .result:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px); /* Eleva ligeramente el elemento */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
 }
 
+/* Título de cada resultado */
 .result h3 {
-    color: #1a73e8;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
+    color: #1a73e8; /* Color azul Google */
+    font-size: 18px; /* Tamaño del texto */
+    font-weight: bold; /* Fuente destacada */
+    margin-bottom: 8px; /* Espaciado inferior */
 }
 
+/* Descripción o contenido dentro de los resultados */
 .result p {
-    color: #5f6368;
-    font-size: 14px;
-    margin: 5px 0;
+    color: #5f6368; /* Color gris para texto secundario */
+    font-size: 14px; /* Tamaño del texto */
+    margin: 5px 0; /* Margen vertical entre párrafos */
 }
 
-/* Botón "Ver más" */
+/* ---------- Botón "Ver más" ---------- */
+/* Botón interactivo para mostrar más contenido */
 .toggle-content {
-    padding: 8px 16px;
-    background-color: #4285F4;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    padding: 8px 16px; /* Espaciado interno */
+    background-color: #4285F4; /* Azul Google */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 20px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: bold; /* Fuente destacada */
+    cursor: pointer; /* Cambia el cursor a "mano" */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animaciones suaves */
+    display: inline-flex; /* Diseño flexible */
+    align-items: center; /* Centra verticalmente los elementos */
+    gap: 8px; /* Espaciado entre ícono y texto */
 }
 
+/* Efecto hover para el botón */
 .toggle-content:hover {
-    background-color: #357ae8;
-    transform: scale(1.05);
+    background-color: #357ae8; /* Azul más oscuro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
 }
 
-/* Contenedor de la barra de búsqueda */
+/* ---------- Barra de Búsqueda ---------- */
+/* Contenedor principal de la barra de búsqueda */
 .search-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
+    display: flex; /* Diseño flexible para alinear elementos horizontalmente */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente el contenido */
+    background-color: #ffffff; /* Fondo blanco */
     border-radius: 50px; /* Bordes completamente redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    width: 100%;
-    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 800px; /* Ancho máximo */
     padding: 10px 15px; /* Espaciado interno */
     margin: 20px auto; /* Centra la barra en la página */
 }
 
-/* Campo de entrada */
+/* Campo de entrada para texto */
 .search-box input[type="text"] {
-    flex: 3;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
+    flex: 3; /* Ocupa la mayor parte del espacio disponible */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 50px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño del texto */
     background-color: #f9f9f9; /* Fondo claro */
     color: #333; /* Texto oscuro */
-    outline: none;
+    outline: none; /* Elimina el contorno predeterminado */
     margin-right: 10px; /* Espaciado entre el campo y el selector */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Animaciones suaves */
 }
 
+/* Estilo para el campo de texto al enfocarse */
 .search-box input[type="text"]:focus {
-    background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5); /* Resalta el campo al enfocarse */
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5); /* Resalta el campo */
     border: 1px solid #4285F4; /* Borde azul */
 }
 
-/* Selector */
+/* Selector desplegable */
 .search-box select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    font-size: 14px;
-    color: #555;
-    background-color: #f9f9f9;
-    outline: none;
+    flex: 1; /* Ocupa menos espacio que el campo de texto */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 30px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño del texto */
+    color: #555; /* Texto gris oscuro */
+    background-color: #f9f9f9; /* Fondo claro */
+    outline: none; /* Elimina el contorno predeterminado */
     margin-right: 10px; /* Espaciado entre el selector y el botón */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animaciones suaves */
 }
 
+/* Estilo del selector al enfocarse */
 .search-box select:focus {
-    border-color: #4285F4;
-    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+    border-color: #4285F4; /* Borde azul */
+    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5); /* Resalta el selector */
 }
 
 /* Botón de búsqueda */
 .search-box button {
-    flex: 1;
-    padding: 10px 15px;
+    flex: 1; /* Ocupa menos espacio */
+    padding: 10px 15px; /* Espaciado interno */
     background-color: #4285F4; /* Azul Google */
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white; /* Texto blanco */
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Fuente destacada */
+    border: none; /* Sin borde */
+    border-radius: 30px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a "mano" */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animaciones suaves */
 }
 
+/* Efecto hover para el botón de búsqueda */
 .search-box button:hover {
-    background-color: #357ae8;
-    transform: scale(1.05);
+    background-color: #357ae8; /* Azul más oscuro */
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
 }
 
-/* Paginación */
+/* ---------- Paginación ---------- */
+/* Contenedor principal de la paginación */
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 8px;
-    font-size: 14px;
+    display: flex; /* Utiliza diseño flexible para alinear los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    margin-top: 20px; /* Espaciado superior */
+    gap: 8px; /* Espaciado entre los elementos */
+    font-size: 14px; /* Tamaño de fuente general para los elementos */
 }
 
+/* Estilo general para los enlaces de la paginación */
 .pagination a {
-    text-decoration: none;
-    padding: 6px 10px;
-    color: #4285F4;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    display: flex;
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    padding: 6px 10px; /* Espaciado interno */
+    color: #4285F4; /* Color de texto azul */
+    border-radius: 50%; /* Forma redondeada para los botones */
+    transition: all 0.3s ease; /* Animaciones suaves al interactuar */
+    display: flex; /* Diseño flexible para centrar el contenido */
     justify-content: center;
     align-items: center;
 }
 
+/* Efecto hover para los enlaces */
 .pagination a:hover {
-    background-color: #4285F4;
-    color: white;
+    background-color: #4285F4; /* Fondo azul al pasar el cursor */
+    color: white; /* Texto blanco en hover */
 }
 
+/* Estilo para el enlace activo */
 .pagination .active {
-    font-weight: bold;
-    background-color: #4285F4;
-    color: white;
+    font-weight: bold; /* Texto en negrita para resaltar */
+    background-color: #4285F4; /* Fondo azul */
+    color: white; /* Texto blanco */
 }
 
+/* Estilo para los enlaces deshabilitados */
 .pagination .disabled {
-    color: #ddd;
-    cursor: not-allowed;
+    color: #ddd; /* Color gris claro */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
 }
 
+/* Información adicional sobre la paginación */
 .pagination .page-info {
-    font-size: 14px;
-    color: #555;
+    font-size: 14px; /* Tamaño del texto */
+    color: #555; /* Texto en gris oscuro */
 }
 
+/* Campo de entrada para ingresar un número de página */
 .pagination input[type="number"] {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: center;
+    width: 50px; /* Ancho del campo */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    text-align: center; /* Alinea el texto al centro */
 }
 
+/* Botón para ir a una página específica */
 .pagination .go-button {
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    background-color: #4285F4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    transition: all 0.3s ease;
+    padding: 5px 10px; /* Espaciado interno */
+    font-size: 14px; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor a "mano" */
+    background-color: #4285F4; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    transition: all 0.3s ease; /* Animaciones suaves */
 }
 
+/* Efecto hover para el botón "Ir" */
 .pagination .go-button:hover {
-    background-color: #357ae8;
+    background-color: #357ae8; /* Fondo azul más oscuro */
 }
