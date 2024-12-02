@@ -39,10 +39,11 @@ relevantes = pd.read_csv(f"{directorio_base}/data/corpus_training_procesado.csv"
 # Configuración de tipos de datos para garantizar consistencia
 df_corpus_procesado["id"] = df_corpus_procesado["id"].astype("string")
 df_corpus_procesado["contenido"] = df_corpus_procesado["contenido"].astype("string")
+relevantes["id"] = relevantes["id"]
 
 # Carga del índice invertido
 indice_invertido = cargar_indice_invertido(f"{directorio_base}/data/indice_invertido.txt")
-relevantes["id"] = relevantes["id"]
+
 
 # Obtención de stopwords y signos de puntuación
 stopwords = obtener_stopwords("stopwords", directorio_base)
