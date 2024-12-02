@@ -69,15 +69,6 @@ Recuperación eficiente de documentos relevantes en base a consultas de usuario.
 #### 6. Evaluación del Sistema
 Medición del desempeño mediante métricas como precisión y recall.
 
-### Estado Actual
-
-El proyecto se encuentra en la etapa de pruebas. Los módulos principales están siendo validados mediante el cuaderno `pruebas.ipynb` en la carpeta `notebooks`.  
-También es posible ejecutar el archivo `main.py` desde la carpeta `src` para realizar pruebas integradas.
-
-En próximas etapas se integrará una interfaz web con **Flask** para proporcionar una experiencia interactiva al usuario.
-
----
-
 ## Requisitos
 
 Instalar las siguientes dependencias antes de ejecutar el proyecto:
@@ -110,7 +101,7 @@ cd ri_proyecto_1b
 ### Desde el cuaderno interactivo
 
 1. Navegue a la carpeta `notebooks/`.  
-2. Abra y ejecute el archivo `pruebas.ipynb`.
+2. Abra y ejecute el archivo `Proyecto_RI_1B.ipynb`.
 
 ### Desde la línea de comandos
 
@@ -178,7 +169,6 @@ Este proyecto implementa un motor de búsqueda con una interfaz de usuario funci
   - Se incluye navegación para ir a páginas específicas.  
 - **Alertas y mensajes**:  
   - El sistema muestra notificaciones cuando no se encuentran resultados o cuando ciertas configuraciones no son aplicables, como en consultas de múltiples palabras con índice invertido.
-
 ---
 
 ### 3. **Documentación del Proceso de Evaluación y Métricas de Desempeño**
@@ -188,6 +178,10 @@ Se desarrolló un módulo específico para calcular las métricas clave de recup
 - **Precisión (Precision)**: Proporción de documentos relevantes en los resultados recuperados.  
 - **Recall**: Proporción de documentos relevantes que fueron correctamente recuperados.  
 - **F1-Score**: Métrica que combina precisión y recall para ofrecer un balance entre ambas.
+**Nota importante:** Es importante resaltar que para la obtención de documentos
+relevantes para realizar las métricas se utilizó los documentos de la carpeta training esto
+puede afectar las métricas ya que para los documentos que se recuperan continente
+tanto la carpeta test como training
 
 #### Implementación
 - **Evaluación Automática**:  
