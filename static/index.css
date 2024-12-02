@@ -1,74 +1,139 @@
+/* Importar la fuente 'Roboto' desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
+/* Estilo base del cuerpo de la página */
 body {
+  /* Configuración de la fuente principal y alternativa */
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: #f0f2f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+  /* Fondo con degradado oscuro superpuesto a una imagen fija */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/Simple_Minimalist_Background.png') no-repeat center center fixed;
+  background-size: cover; /* Ajustar la imagen de fondo a la pantalla */
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Altura de la pantalla completa */
+  margin: 0; /* Eliminar márgenes predeterminados */
 }
 
+/* Contenedor de la barra de búsqueda */
 .search-bar {
-  display: flex;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 35px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 850px;
-  height: 70px;
-  transition: box-shadow 0.3s ease;
+  display: flex; /* Flexbox para alinear elementos */
+  align-items: center; /* Centrar verticalmente */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra externa */
+  border-radius: 50px; /* Bordes redondeados */
+  overflow: hidden; /* Esconder contenido que sobresalga */
+  width: 850px; /* Ancho de la barra */
+  height: 70px; /* Altura de la barra */
+  transition: all 0.3s ease-in-out; /* Transiciones suaves */
 }
 
+/* Efecto hover para la barra de búsqueda */
 .search-bar:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+  transform: translateY(-2px); /* Efecto de elevación */
 }
 
+/* Campo de texto dentro de la barra de búsqueda */
 .search-bar input[type="text"] {
-  border: none;
-  outline: none;
-  padding: 20px 20px;
-  flex: 1;
-  font-size: 18px;
-  color: #333;
-  background-color: #f8f9fc;
-  border-right: 1px solid #e0e0e0;
-  border-radius: 35px 0 0 35px;
-  transition: background-color 0.3s ease;
+  border: none; /* Sin bordes */
+  outline: none; /* Sin borde al enfocar */
+  padding: 20px 20px; /* Espaciado interno */
+  flex: 1; /* Ocupar todo el espacio disponible */
+  font-size: 18px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  background-color: #f8f9fc; /* Fondo claro */
+  border-right: 1px solid #e0e0e0; /* Separador con el siguiente elemento */
+  border-radius: 50px 0 0 50px; /* Bordes redondeados específicos */
+  transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease, border 0.3s ease; /* Transiciones */
 }
 
+/* Estilo cuando el campo de texto está enfocado */
 .search-bar input[type="text"]:focus {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #0056b3; /* Borde azul */
+  box-shadow: 0 0 10px rgba(0, 86, 179, 0.5); /* Sombra azul */
 }
 
+/* Estilo del selector dentro de la barra de búsqueda */
 .search-bar select {
-  border: none;
-  outline: none;
-  padding: 15px;
-  font-size: 18px;
-  color: #333;
-  background-color: transparent;
-  cursor: pointer;
-  text-align: center;
-  font-weight: 500;
+  border: none; /* Sin bordes */
+  outline: none; /* Sin borde al enfocar */
+  padding: 15px 20px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de fuente */
+  font-weight: 500; /* Peso de fuente intermedio */
+  color: #333; /* Color del texto */
+  background-color: transparent; /* Fondo transparente */
+  cursor: pointer; /* Cambiar cursor a mano */
+  text-align: center; /* Centrar texto */
+  border-right: 1px solid #e0e0e0; /* Separador con el siguiente elemento */
+  background-image: url('img/arrow-icon.svg'); /* Icono de flecha */
+  background-repeat: no-repeat; /* No repetir el icono */
+  background-position: right 10px center; /* Posición del icono */
+  padding-right: 30px; /* Espaciado a la derecha */
+  border-radius: 5px; /* Bordes sutilmente redondeados */
+  transition: all 0.3s ease; /* Transiciones */
 }
 
+/* Efecto hover para el selector */
+.search-bar select:hover {
+  background-color: #f0f2f5; /* Fondo claro */
+  color: #0056b3; /* Texto azul */
+}
+
+/* Estilo para las opciones dentro del selector */
+.search-bar select option {
+  padding: 10px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  background-color: #ffffff; /* Fondo blanco */
+  border: none; /* Sin bordes */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
+}
+
+/* Estilo para la opción seleccionada */
+.search-bar select option:checked {
+  background-color: #0056b3; /* Fondo azul */
+  color: #ffffff; /* Texto blanco */
+}
+
+/* Efecto hover para las opciones del selector */
+.search-bar select option:hover {
+  background-color: #f0f2f5; /* Fondo claro */
+  color: #0056b3; /* Texto azul */
+}
+
+/* Botón de búsqueda */
 .search-bar button {
-  border: none;
-  outline: none;
-  padding: 24px 30px;
-  background-color: #0056b3;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 0 35px 35px 0;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex; /* Flexbox para centrar contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  border: none; /* Sin bordes */
+  outline: none; /* Sin borde al enfocar */
+  padding: 24px 30px; /* Espaciado interno */
+  background: linear-gradient(90deg, #0056b3, #0078d4); /* Gradiente azul */
+  color: #ffffff; /* Texto blanco */
+  font-weight: 500; /* Peso de fuente intermedio */
+  font-size: 18px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambiar cursor a mano */
+  border-radius: 0 50px 50px 0; /* Bordes redondeados específicos */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra del texto */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones */
 }
 
+/* Efecto hover para el botón */
 .search-bar button:hover {
-  background-color: #004494;
-  transform: scale(1.05);
+  background-color: #004494; /* Azul más oscuro */
+  transform: scale(1.05); /* Escalado suave */
+  box-shadow: 0 4px 8px rgba(0, 86, 179, 0.5); /* Sombra azul */
+}
+
+/* Efecto active para el botón */
+.search-bar button:active {
+  transform: scale(0.95); /* Reducir tamaño */
+}
+
+/* Transiciones generales para todos los elementos dentro de la barra */
+.search-bar * {
+  transition: all 0.3s ease-in-out; /* Transiciones uniformes */
 }

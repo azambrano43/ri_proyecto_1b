@@ -1,34 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscador de Información</title>
+    <!-- Declaración del tipo de documento HTML y especificación del idioma -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Habilita la adaptabilidad para dispositivos móviles -->
+    <title>Buscador de Información</title> <!-- Título de la página que aparece en la pestaña del navegador -->
+
+    <!-- Enlace al archivo CSS usando Flask para obtenerlo desde la carpeta "static" -->
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+    <!-- Script para validar el formulario antes de enviarlo -->
     <script>
         function validarFormulario(event) {
+            // Obtiene el valor del campo de texto "consulta" y elimina los espacios adicionales
             const consulta = document.querySelector('input[name="consulta"]').value.trim();
+
+            // Verifica si el campo está vacío
             if (!consulta) {
-                alert("Por favor, escribe una consulta antes de buscar.");
+                alert("Por favor, escribe una consulta antes de buscar."); // Muestra una alerta al usuario
                 event.preventDefault(); // Evita que el formulario se envíe
             }
         }
     </script>
 </head>
 <body>
-    <div class="search-box">
+    <!-- ---------- Barra de búsqueda ---------- -->
+    <div class="search-box"> <!-- Contenedor principal para la barra de búsqueda -->
+        <!-- Formulario que envía los datos al servidor -->
         <form action="/buscar" method="POST" onsubmit="validarFormulario(event)">
-            <div class="search-bar">
+            <div class="search-bar"> <!-- Contenedor interno de la barra de búsqueda -->
+                <!-- Campo de entrada para escribir la consulta -->
                 <input type="text" name="consulta" placeholder="Escribe tu consulta aquí...">
-                <div class="divider"></div> <!-- Línea divisoria -->
+
+                <!-- Línea divisoria decorativa -->
+                <div class="divider"></div>
+
+                <!-- Menú desplegable para seleccionar el método de búsqueda -->
                 <select name="metodo">
-                  <option value="tfidf">TF-IDF</option>
-                  <option value="bow">Bag of Words</option>
-                  <option value="word2vec">Word2Vec</option>
-                  <option value="indice_invertido">Indice-invertido</option>
+                    <option value="tfidf">TF-IDF</option> <!-- Método TF-IDF -->
+                    <option value="bow">Bag of Words</option> <!-- Método Bag of Words -->
+                    <option value="word2vec">Word2Vec</option> <!-- Método Word2Vec -->
+                    <option value="indice_invertido">Indice-invertido</option> <!-- Índice invertido -->
                 </select>
-                <button type="submit">BUSCAR</button>
-              </div>
+
+                <!-- Botón para enviar la búsqueda -->
+                <button type="submit">
+                    <i class="fas fa-search">BUSCAR</i> <!-- Icono de búsqueda y texto del botón -->
+                </button>
+            </div>
         </form>
     </div>
 </body>
