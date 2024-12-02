@@ -43,6 +43,7 @@ RI_PROYECTO_1B/
 ├── index.py                  # Archivo .py encargado del manejo de la logica web
 ├── README.md                  # Descripción general del proyecto
 ├── .gitignore                 # Archivos y carpetas ignorados por Git
+├── Proyecto_RI_1B.pdf         # Informe final del proyecto
 ```
 
 
